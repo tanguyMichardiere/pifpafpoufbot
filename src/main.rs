@@ -1,10 +1,22 @@
 use irc::client::prelude::*;
+use std::collections::HashMap;
 
 fn main() {
-    let yaml = std::fs::read_to_string("commands.yaml").expect("Error reading commands.yaml");
-    let commands: std::collections::HashMap<String, String> =
-        serde_yaml::from_str(&yaml).expect("Error parsing commands.yaml");
-    let client = IrcClient::new("config.toml").expect("Error parsing config.toml");
+    let commands: HashMap<String, String>;
+    match std::fs::read_to_string("commands.yaml") {
+        Ok(yaml) => commands = serde_yaml::from_str(&yaml).expect("Error parsing commands.yaml"),
+        Err(_e) => {
+            println!("commands.yaml not found, bot starting with no static command");
+            commands = HashMap::new()
+        }
+    }
+    let client: IrcClient;
+    match Config::load("config.toml") {
+        Ok(config) => {
+            client = IrcClient::from_config(config).expect("Error creating client from config.toml")
+        }
+        Err(e) => panic!("Error reading config.toml: {}", e),
+    }
     client.identify().expect("Error identifying");
     client
         .for_each_incoming(|irc_msg| {
