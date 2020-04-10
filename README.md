@@ -40,12 +40,12 @@ port = 6697
 use_ssl = true
 channels = ["#<your-twitch-channel-in-lowercase>"]
 password = "oauth:<your-oauth-token"
-nickname = "<the-bot's-twitch-name>"
+nickname = "<the-bot's-twitch-name-in-lowercase>"
 ```
 
 See [this Twitch Developpers guide](https://dev.twitch.tv/docs/irc/guide#connecting-to-twitch-irc) to generate your oauth token.
 
-See [the iirc crate on GitHub](https://github.com/aatxe/irc) for an exhaustive list of configuration fields.
+See [the irc crate on GitHub](https://github.com/aatxe/irc) for an exhaustive list of configuration fields.
 
 ### Commands configuration
 
