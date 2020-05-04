@@ -5,6 +5,7 @@ A very simple Twitch chat bot written in Rust
 - [PifpafpoufBot](#pifpafpoufbot)
   - [Roadmap](#roadmap)
   - [Installation](#installation)
+  - [Usage](#usage)
   - [Configuration](#configuration)
     - [IRC configuration](#irc-configuration)
     - [Commands configuration](#commands-configuration)
@@ -14,16 +15,23 @@ A very simple Twitch chat bot written in Rust
 
 - [x] static commands
 - [ ] custom command prefix
+- [ ] timeout between commands
+- [ ] periodic message
 - [ ] dynamic commands
   - [ ] uptime
   - [ ] add a static command (temporarily or permanently)
+  - [ ] help
 
 ## Installation
 
+```Shell
+cargo install --git git@github.com:tanguyMichardiere/pifpafpoufbot.git pifpafpoufbot
 ```
-git clone git@github.com:tanguyMichardiere/pifpafpoufbot.git
-cd pifpafpoufbot
-cargo run --release
+
+## Usage
+
+```Shell
+pifpafpoufbot config.toml [commands.yaml]
 ```
 
 ## Configuration
