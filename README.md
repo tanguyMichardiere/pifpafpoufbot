@@ -25,7 +25,7 @@ A very simple Twitch chat bot written in Rust
 ## Installation
 
 ```Shell
-cargo install --git git@github.com:tanguyMichardiere/pifpafpoufbot.git pifpafpoufbot
+cargo install --git https://github.com/tanguyMichardiere/pifpafpoufbot.git pifpafpoufbot
 ```
 
 ## Usage
