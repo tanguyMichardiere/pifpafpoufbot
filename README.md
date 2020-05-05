@@ -39,10 +39,10 @@ pifpafpoufbot config.toml [commands.toml]
 
 ### Included commands
 
-* uptime: get the current uptime of the stream
-* help: get a list of available commands
-* add: add a temporary static command
-* add!: add a permanent static command (editing ```commands.toml```)
+* uptime: get the current uptime of the stream (not included yet)
+* help: get a list of available commands (not included yet)
+* add: add a temporary static command (not included yet)
+* add!: add a permanent static command (editing ```commands.toml```) (not included yet)
 
 ## Configuration
 
@@ -71,8 +71,6 @@ In case you want to modify what the bot recognizes as commands, you can add an `
 
 ```toml
 #config.toml
-
-...
 
 [options]
 prefix = "!"   # prefix to all commands
