@@ -6,23 +6,26 @@ A very simple Twitch chat bot written in Rust
   - [Roadmap](#roadmap)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [Included commands](#included-commands)
   - [Configuration](#configuration)
-    - [IRC configuration](#irc-configuration)
-    - [Commands configuration](#commands-configuration)
-      - [Static commands](#static-commands)
+    - [Main configuration file](#main-configuration-file)
+      - [Additional options](#additional-options)
+    - [Static commands configuration](#static-commands-configuration)
 
 ## Roadmap
 
 - [x] static commands
-- [ ] custom command prefix
+- [x] custom command prefix
 - [ ] timeout between commands
 - [ ] periodic message
 - [ ] dynamic commands
   - [ ] uptime
-  - [ ] add a static command (temporarily or permanently)
   - [ ] help
+  - [ ] add a static command (temporarily or permanently)
 
 ## Installation
+
+build dependency: [OpenSSL](https://docs.rs/openssl/0.10.16/openssl/#automatic)
 
 ```Shell
 cargo install --git https://github.com/tanguyMichardiere/pifpafpoufbot.git pifpafpoufbot
@@ -31,12 +34,19 @@ cargo install --git https://github.com/tanguyMichardiere/pifpafpoufbot.git pifpa
 ## Usage
 
 ```Shell
-pifpafpoufbot config.toml [commands.yaml]
+pifpafpoufbot config.toml [commands.toml]
 ```
+
+### Included commands
+
+* uptime: get the current uptime of the stream
+* help: get a list of available commands
+* add: add a temporary static command
+* add!: add a permanent static command (editing ```commands.toml```)
 
 ## Configuration
 
-### IRC configuration
+### Main configuration file
 
 Minimal config:
 
@@ -55,18 +65,34 @@ See [this Twitch Developpers guide](https://dev.twitch.tv/docs/irc/guide#connect
 
 See [the irc crate on GitHub](https://github.com/aatxe/irc) for an exhaustive list of configuration fields.
 
-### Commands configuration
+#### Additional options
 
-#### Static commands
+In case you want to modify what the bot recognizes as commands, you can add an ```[options]``` section at the end of ```config.toml``` with the following (all optional) fields:
 
-Commands of which the response is always the same are stored in a HashMap read from a yaml file. The bot listens to all messages on its channel(s) and if a message is equal to a key, the value associated is sent in the same channel.
+```toml
+#config.toml
+
+...
+
+[options]
+prefix = "!"   # prefix to all commands
+uptime = "uptime"
+help = "help"
+add = "add"
+add_permanent = "add!"
+```
+
+The values given here are the default ones.
+
+### Static commands configuration
+
+Commands of which the response is always the same are stored in a HashMap read from a toml file. The bot listens to all messages on its channel and if a message is equal to a key (with the prefix configured in the main configuration file), the value associated is sent in the same channel.
 
 Example commands:
 
-```yaml
-# commands.yaml
+```toml
+# commands.toml
 
----
-"!ping": pong
-"!uptime": no idea i'm a static response
+ping = "pong"
+planning = "www.yourwebsite.com/planning"
 ```
